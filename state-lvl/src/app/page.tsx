@@ -8,7 +8,12 @@ const Page = () =>{
 
   const handleClick = () =>{
     setCount(count++);
-    setSecret(true);
+    if(secret){
+      setSecret(false);
+    } else{
+      setSecret(true);
+    }
+    
   }
 
   return (
