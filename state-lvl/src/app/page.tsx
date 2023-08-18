@@ -7,7 +7,7 @@ const Page = () =>{
   let [secret, setSecret] = useState<boolean>(false)
 
   const handleClick = () =>{
-    setCount(count++);
+    setCount(++count);
     if(secret){
       setSecret(false);
     } else{
@@ -19,7 +19,7 @@ const Page = () =>{
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
       <p>{count}</p>
-      <button className="bg-blue-500 p-3" onClick={handleClick}>+1</button>
+      <button className="bg-blue-500 p-3" onClick={handleClick}>{!secret ? 'Mostrar' : 'Ocultar'}</button>
       {secret &&
         <div className="p-1 bg-blue-300 rounded-md mt-3">Área secreta</div>
       }      
