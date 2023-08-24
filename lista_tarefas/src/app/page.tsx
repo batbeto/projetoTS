@@ -6,33 +6,34 @@ import { useState } from "react";
 const Page = () =>{
   const [itemInput, setItemInput] =  useState('');
   const [list, setList] = useState<TodoItem[]>([
-    {label: 'Fazer dever de casa', checked: false},
-    {label: 'Comprar o bolo', checked: false}
+    {id: 1, label: 'Fazer dever de casa', checked: false},
+    {id: 2, label: 'Comprar o bolo', checked: false}
   ]);
   
   const handleAddButton = () =>{
     if(itemInput.trim() == '') return;
     setList([
       ...list,
-      {label: itemInput, checked: false}
+      {id: list.length + 1, label: itemInput, checked: false}
     ]);
     setItemInput('');
   };
 
-  const deleteItem = (index: number) =>{
-    setList(list.filter((item, key) => key != index));
+  const deleteItem = (id: number) =>{
+    setList(list.filter((item) => item.id != id));
   }
 
-  const toggleItem = (index: number) =>{
-    let newList = {...list};
-    for(let i in newList){
-      if(index === parseInt(i)){
-        newList[i].checked = !newList[i].checked;
+  const toggleItem = (id: number) =>{
+    let newList = [...list];
+    for (let i in newList){
+      if(newList[i].id === id){
+        newList[i].checked = !newList[i].checked
       }
+      
     }
     setList(newList);
   }
-
+  
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
       <h1 className="text-4xl mt-5">Lista de tarefas</h1>
@@ -47,10 +48,10 @@ const Page = () =>{
         <button onClick={handleAddButton}>Adicionar</button>
       </div>
       <ul className="w-full max-w-lg list-disc pl-5">
-        {list.map((item, index) => (
-           <li key={index}>
-            <input onClick={()=>toggleItem(index)} type="checkbox" checked={item.checked} className="w-6 h-6 mr-6"></input>
-            {item.label} - <button className="hover:underline" onClick={()=>deleteItem(index)}>[ Deletar ]</button></li> 
+        {list.map((item) => (
+           <li key={item.id}>
+            <input  onClick={()=>(toggleItem(item.id))} type="checkbox" checked={item.checked} className="w-6 h-6 mr-6" />
+            {item.label} - <button className="hover:underline" onClick={() => deleteItem(item.id)}>[ Deletar ]</button></li> 
         ))}
       </ul>      
     </div>
