@@ -1,8 +1,10 @@
 'use client'
+import { Square } from "@/components/Square";
 import { VideoPlayer } from "@/components/VideosPlayer";
 import { useEffect, useState } from "react";
 
 const Page = () => {
+  const [show,setShow] = useState(false);
   const [playing, setPlaying] = useState(false);
 
   return(
@@ -15,6 +17,11 @@ const Page = () => {
         src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
         isPlaying={playing}
       />
+
+      <div className="">
+        <button onClick={()=>setShow(!show)}>Mostrar/Ocultar</button>
+        {show && <Square />}
+      </div>
 
     </div>
   );
