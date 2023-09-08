@@ -39,7 +39,6 @@ export const listReducer = (list: Item[], action: listActions ) => {
         text: action.payload.text,
         done: false
       }]
-      break;
     case 'editText':
       return list.map(t => {
         if (t.id === action.payload.id) {
@@ -47,7 +46,6 @@ export const listReducer = (list: Item[], action: listActions ) => {
         }
         return t;
       });
-      break;
     case 'toggleDone':
       return list.map( t => {
         if(t.id === action.payload.id){
@@ -55,14 +53,11 @@ export const listReducer = (list: Item[], action: listActions ) => {
         }
         return t;
       });
-      break;
     case 'remove':
       return list.filter( t =>{
         t.id === action.payload.id;
       });
-      break;
     default:
       return list;
-      break;
   }
 }
