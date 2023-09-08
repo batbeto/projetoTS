@@ -1,46 +1,52 @@
-import { Item } from "@/types/Item";
-import { useState } from "react";
+'use client'
+
+import { listReducer } from "@/reducers/listReducer";
+import { useReducer } from "react";
 
 const Page = () =>{
-  const [list, setList] = useState<Item[]>([]);
+  const [list, dispatch] = useReducer(listReducer, []);
 
-  const addNewList = (text: string) => {
-    setList([ ...list, {
-      id: list.length,
-      text,
-      done:false
-    }]);
+  const handleAddClick = () => {
+    dispatch({
+      type: 'add',
+      payload: {
+        text: 'Novo item'
+      }
+    });
   }
 
-  const editItemText = (id:number, newText: string) => {
-    setList(
-      list.map((t)=>{
-        if(t.id === id){
-          t.text = newText;
-        }
-        return t;
-      })
-    );
+  const toggleItemClick = (id: number) =>{
+    dispatch({
+      type: 'toggleDone',
+      payload: {
+        id
+      }
+    });
   }
 
-  const toggleItem = (id:number) => {
-    setList(
-      list.map((t)=>{
-        if(t.id === id){
-          t.done = !t.done;
-        }
-        return t;
-      })
-    );
+  const editItemClick = (id:number, newText: string) =>{
+    dispatch({
+      type: 'editText',
+      payload: {
+        id,
+        newText
+      }
+    });
   }
 
-  const removeItem = (id:number) => {
-    setList( list.filter(t => t.id != id));
+  const removeItemClick = (id: number) =>{
+    dispatch({
+      type: 'remove',
+      payload: {
+        id
+      }
+    });
   }
+
 
   return(
     <div className="">
-
+      <button onClick={handleAddClick}></button>
     </div>
   );
 }
