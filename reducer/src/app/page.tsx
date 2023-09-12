@@ -20,6 +20,31 @@ const Page = () =>{
     setAddField('');
   };
 
+  const handleRemove = (id: number) => {
+    if(!window.confirm('Tem certeza que deseja excluir?')) return false;
+    dispatch({
+      type: 'remove',
+      payload: {
+        id
+      }
+    });
+  }
+
+  const handleEdit = (id: number) => {
+    const item = list.find(it => it.id === id);
+    if(!item) return false;
+    const newText = window.prompt('Editar tarefa', item.text);
+    if(!newText || newText.trim() === '' ) return false;
+    dispatch({
+      type: 'editText',
+      payload: {
+        id,
+        newText
+      }
+    });
+    
+  }
+
   const handleDoneCheckbox = (id: number) => {
     dispatch({
       type: 'toggleDone',
@@ -56,8 +81,18 @@ const Page = () =>{
             onClick={()=> handleDoneCheckbox(item.id)}
             />
             <p className="flex-1 text-lg">{item.text}</p>
-            <button className="rounded-md bg-blue-700 mx-4 hover:text-gray-500">Editar</button>
-            <button className="rounded-md bg-blue-700 mx-4 hover:text-gray-500">Excluir</button>
+            <button 
+              className="rounded-md bg-blue-700 mx-4 hover:text-gray-500"
+              onClick={() => handleEdit(item.id)}
+            >
+            Editar
+            </button>
+            <button 
+              className="rounded-md bg-blue-700 mx-4 hover:text-gray-500"
+              onClick={()=> handleRemove(item.id)}
+            >
+              Excluir
+            </button>
           </li>
         ))}
       </ul>
