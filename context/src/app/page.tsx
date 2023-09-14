@@ -1,25 +1,31 @@
 'use client'
+
 type Props = {
   title: string,
   subtitle: string
 }
-const Title = () => {
+
+type labelProps = {
+  label: string
+}
+
+const Title = ({ label }: labelProps) => {
   return(
-    <h1>...</h1>
+    <h1 className="text-4xl font-bold my-4">{label}</h1>
   );
 }
 
-const Subtitle = () =>{
+const Subtitle = ({ label }: labelProps) =>{
   return(
-    <p>...</p>
+    <p>{label}</p>
   );
 }
 
-const Header = ({ title, subtitle}: Props) => {
+const Header = ({ title, subtitle }: Props) => {
   return (
     <header>
-      <Title />
-      <Subtitle />
+      <Title label={title} />
+      <Subtitle label={subtitle}/>
     </header>
   );
 }
