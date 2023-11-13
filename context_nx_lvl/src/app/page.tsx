@@ -9,9 +9,9 @@ const Page = () => {
   return(
     <PostProvider>
       <div className="container mx-auto">
-      <Header />
-      <PostList />
-      <Footer />
+        <Header />
+        <PostList />
+        <Footer />
       </div>
     </PostProvider>
   );
