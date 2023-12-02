@@ -1,5 +1,6 @@
 import { useUser } from "@/contexts/UserContext";
 import { NameInput } from "./NameInput";
+import { ChatInput } from "./ChatInput";
 
 export const Chat = () =>{
     const userCtx = useUser();
@@ -13,10 +14,10 @@ export const Chat = () =>{
                 ,...
             </div>
             <div className="border-t border-t-white/30 p-3">
-                ...
+                <ChatInput name= {userCtx?.user}/>
             </div>
             <div className="border-t border-t-white/30 p-3">
-                ;;;;
+                <ChatInput name= {'bot'}/>
             </div>
         </div>
     );
